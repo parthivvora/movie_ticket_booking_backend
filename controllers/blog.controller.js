@@ -177,14 +177,13 @@ exports.getAllBlogsByUser = async (req, res) => {
 };
 
 // Get single blog by User using blogId (Frontend only)
-exports.getAllBlogsByUser = async (req, res) => {
+exports.getSingleBlogByUser = async (req, res) => {
   try {
     const { blogId } = req.params;
     const blogData = await blogModel
       .find({ _id: new mongoose.Types.ObjectId(blogId) })
       .select("-__v -updatedAt");
     if (blogData.length > 0) {
-      var raw = "";
       Object.keys(blogData).forEach((key) => {
         blogData[key][
           "blogImage"

@@ -14,6 +14,9 @@ const movieInfoSchema = new mongoose.Schema(
     movieBanner: {
       type: String,
     },
+    movieImages: {
+      type: [String],
+    },
     movieType: {
       type: [mongoose.Schema.Types.ObjectId],
     },
@@ -25,9 +28,6 @@ const movieInfoSchema = new mongoose.Schema(
     },
     movieShowType: {
       type: [mongoose.Schema.Types.ObjectId],
-    },
-    movieImages: {
-      type: [String],
     },
     description: {
       type: String,

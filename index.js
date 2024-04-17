@@ -17,6 +17,10 @@ app.use(express.static(path.join(__dirname, "/public")));
 
 app.use("/", require("./routes/index"));
 
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "/public/index.html"));
+});
+
 db.on("connected", () => {
   console.log("Mongoose connected to MongoDB");
   app.listen(process.env.PORT, () =>

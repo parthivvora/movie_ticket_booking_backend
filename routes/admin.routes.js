@@ -15,15 +15,18 @@ const {
   updateBlogById,
 } = require("../controllers/blog.controller");
 const { addMovie } = require("../controllers/movie.controller");
+const {
+  addLanguage,
+  getAllLanguage,
+} = require("../controllers/language.controller");
+const {
+  getAllMovieType,
+  addMovieType,
+} = require("../controllers/movieType.controller");
 const { adminAuth } = require("../middleware/adminAuth");
 const blogImageUpload = require("../middleware/blogImageUpload");
-const {
-  movieBannerUpload,
-  movieThumbsUpload,
-} = require("../middleware/movieImagesUpload");
 const upload = require("../middleware/movieImagesUpload");
 const { isAuthenticated } = require("../middleware/check");
-const { addLanguage, getAllLanguage } = require("../controllers/language.controller");
 require("../middleware/localStrategy");
 const router = express();
 
@@ -81,9 +84,7 @@ router.put(
 // Add Movie
 router.post(
   "/add-movie",
-  // adminAuth,
-  // movieBannerUpload,
-  // movieThumbsUpload,
+  adminAuth,
   upload.fields([
     { name: "movieBanner", maxCount: 1 },
     { name: "movieThumbImg", maxCount: 1 },
@@ -94,5 +95,9 @@ router.post(
 // Add Language
 router.post("/add-language", adminAuth, addLanguage);
 router.get("/get-language", adminAuth, getAllLanguage);
+
+// Add Movie Type
+router.post("/add-movieType", adminAuth, addMovieType);
+router.get("/get-movieType", adminAuth, getAllMovieType);
 
 module.exports = router;

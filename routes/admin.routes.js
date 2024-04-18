@@ -23,6 +23,7 @@ const {
 } = require("../middleware/movieImagesUpload");
 const upload = require("../middleware/movieImagesUpload");
 const { isAuthenticated } = require("../middleware/check");
+const { addLanguage, getAllLanguage } = require("../controllers/language.controller");
 require("../middleware/localStrategy");
 const router = express();
 
@@ -89,5 +90,9 @@ router.post(
   ]),
   addMovie
 );
+
+// Add Language
+router.post("/add-language", adminAuth, addLanguage);
+router.get("/get-language", adminAuth, getAllLanguage);
 
 module.exports = router;

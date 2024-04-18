@@ -28,6 +28,7 @@ const blogImageUpload = require("../middleware/blogImageUpload");
 const upload = require("../middleware/movieImagesUpload");
 const { isAuthenticated } = require("../middleware/check");
 const { addTheater, getAllTheaters } = require("../controllers/theater.controller");
+const { addMovieShowType, getAllMovieShowType } = require("../controllers/movieShowType.controller");
 require("../middleware/localStrategy");
 const router = express();
 
@@ -104,5 +105,9 @@ router.get("/get-movieType", adminAuth, getAllMovieType);
 // Add Theater
 router.post("/add-theater", adminAuth, addTheater);
 router.get("/get-theater", adminAuth, getAllTheaters);
+
+// Add Movie Show Type
+router.post("/add-movieShowType", adminAuth, addMovieShowType);
+router.get("/get-movieShowType", adminAuth, getAllMovieShowType);
 
 module.exports = router;

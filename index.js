@@ -1,25 +1,22 @@
 const express = require("express");
-const app = express();
 const cors = require("cors");
 const path = require("path");
-
+const flash = require("connect-flash");
+const app = express();
 const db = require("./utils/dbConfig");
 
+app.set("view engine", "ejs");
 app.use(express.json());
+app.use(flash());
 app.use(
   cors({
     origin: ["http://localhost:3000"],
     methods: ["POST", "GET", "DELETE", "PUT"],
   })
 );
-
 app.use(express.static(path.join(__dirname, "/public")));
-
+app.use(express.urlencoded({ extended: true }));
 app.use("/", require("./routes/index"));
-
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/public/index.html"));
-});
 
 db.on("connected", () => {
   console.log("Mongoose connected to MongoDB");

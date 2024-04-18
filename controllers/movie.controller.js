@@ -20,7 +20,6 @@ exports.addMovie = async (req, res) => {
     // }
    
     console.log(req.files);
-    // console.log(req.movieThumbImg);
     
     return res.status(responseStatusCode.SUCCESS).json({
       status: responseStatusText.SUCCESS,

@@ -27,6 +27,7 @@ const { adminAuth } = require("../middleware/adminAuth");
 const blogImageUpload = require("../middleware/blogImageUpload");
 const upload = require("../middleware/movieImagesUpload");
 const { isAuthenticated } = require("../middleware/check");
+const { addTheater, getAllTheaters } = require("../controllers/theater.controller");
 require("../middleware/localStrategy");
 const router = express();
 
@@ -99,5 +100,9 @@ router.get("/get-language", adminAuth, getAllLanguage);
 // Add Movie Type
 router.post("/add-movieType", adminAuth, addMovieType);
 router.get("/get-movieType", adminAuth, getAllMovieType);
+
+// Add Theater
+router.post("/add-theater", adminAuth, addTheater);
+router.get("/get-theater", adminAuth, getAllTheaters);
 
 module.exports = router;

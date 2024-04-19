@@ -30,6 +30,7 @@ const { isAuthenticated } = require("../middleware/check");
 const { addTheater, getAllTheaters } = require("../controllers/theater.controller");
 const { addMovieShowType, getAllMovieShowType } = require("../controllers/movieShowType.controller");
 const { addScreen, getAllScreens } = require("../controllers/screen.controller");
+const { getAllShowTime, addShowTimes } = require("../controllers/showTime.controller");
 require("../middleware/localStrategy");
 const router = express();
 
@@ -114,5 +115,9 @@ router.get("/get-movieShowType", adminAuth, getAllMovieShowType);
 // Add Screen
 router.post("/add-screen", adminAuth, addScreen);
 router.get("/get-screen", adminAuth, getAllScreens);
+
+// Add Show Time of Movie
+router.post("/add-showTime", adminAuth, addShowTimes);
+router.get("/get-showTime", adminAuth, getAllShowTime);
 
 module.exports = router;

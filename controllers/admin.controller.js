@@ -27,7 +27,8 @@ exports.getAdminLogin = (req, res, next) => {
 // Dashboard
 exports.getDashboard = (req, res, next) => {
   try {
-    return res.render("home");
+    const currentPage = "/admin/dashboard";
+    return res.render("home", { currentPage });
   } catch (error) {
     console.log("🚀 ~ error:", error);
   }
@@ -36,11 +37,13 @@ exports.getDashboard = (req, res, next) => {
 exports.getUserLists = async (req, res) => {
   try {
     const userDataList = await userModel.find().select("-__v");
-    return res.status(responseStatusCode.SUCCESS).json({
-      status: responseStatusText.SUCCESS,
-      message: "User lists fetched successfully",
-      userDataList,
-    });
+    const currentPage = "/admin/user-list";
+    return res.render("getUsersList", { userDataList, currentPage });
+    // return res.status(responseStatusCode.SUCCESS).json({
+    //   status: responseStatusText.SUCCESS,
+    //   message: "User lists fetched successfully",
+    //   userDataList,
+    // });
   } catch (error) {
     console.log("🚀 ~ exports.getUserLists= ~ error:", error);
     return res.status(responseStatusCode.INTERNAL_SERVER).json({

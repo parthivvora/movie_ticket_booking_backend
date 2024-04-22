@@ -72,29 +72,31 @@ router.post(
     failureFlash: true,
   })
 );
-router.get("/get-user-list", isAuthenticated, getUserLists);
+
+// Get all users list
+router.get("/user-list", getUserLists);
 
 // Dashboard
 router.get("/dashboard", getDashboard);
 
-// Contact
-router.get("/get-contact-information", adminAuth, getContactInformation);
+// Get all contact information
+router.get("/contact-list", getContactInformation);
 
-// Subscribe
-router.get("/get-subscribe", adminAuth, getSubscribeDetails);
+// Get all subscribes information
+router.get("/subscribe-list", getSubscribeDetails);
 
 // Blog
 router.post(
   "/add-blog",
-  adminAuth,
+
   blogImageUpload.single("blogImage"),
   addBlog
 );
-router.get("/get-blog", adminAuth, getAllBlogs);
-router.delete("/delete-blog/:blogId", adminAuth, deleteBlogById);
+router.get("/get-blog", getAllBlogs);
+router.delete("/delete-blog/:blogId", deleteBlogById);
 router.put(
   "/update-blog/:blogId",
-  adminAuth,
+
   blogImageUpload.single("blogImage"),
   updateBlogById
 );
@@ -102,7 +104,7 @@ router.put(
 // Add Movie
 router.post(
   "/add-movie",
-  adminAuth,
+
   upload.fields([
     { name: "movieBanner", maxCount: 1 },
     { name: "movieThumbImg", maxCount: 1 },
@@ -111,27 +113,27 @@ router.post(
 );
 
 // Add Language
-router.post("/add-language", adminAuth, addLanguage);
-router.get("/get-language", adminAuth, getAllLanguage);
+router.post("/add-language", addLanguage);
+router.get("/get-language", getAllLanguage);
 
 // Add Movie Type
-router.post("/add-movieType", adminAuth, addMovieType);
-router.get("/get-movieType", adminAuth, getAllMovieType);
+router.post("/add-movieType", addMovieType);
+router.get("/get-movieType", getAllMovieType);
 
 // Add Theater
-router.post("/add-theater", adminAuth, addTheater);
-router.get("/get-theater", adminAuth, getAllTheaters);
+router.post("/add-theater", addTheater);
+router.get("/get-theater", getAllTheaters);
 
 // Add Movie Show Type
-router.post("/add-movieShowType", adminAuth, addMovieShowType);
-router.get("/get-movieShowType", adminAuth, getAllMovieShowType);
+router.post("/add-movieShowType", addMovieShowType);
+router.get("/get-movieShowType", getAllMovieShowType);
 
 // Add Screen
-router.post("/add-screen", adminAuth, addScreen);
-router.get("/get-screen", adminAuth, getAllScreens);
+router.post("/add-screen", addScreen);
+router.get("/get-screen", getAllScreens);
 
 // Add Show Time of Movie
-router.post("/add-showTime", adminAuth, addShowTimes);
-router.get("/get-showTime", adminAuth, getAllShowTime);
+router.post("/add-showTime", addShowTimes);
+router.get("/get-showTime", getAllShowTime);
 
 module.exports = router;

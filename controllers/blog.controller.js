@@ -7,29 +7,32 @@ const blogModel = require("../models/blog.model");
 const { addBlogValidation } = require("../validations/blog.validation");
 const fs = require("fs");
 const { default: mongoose } = require("mongoose");
+const apiRoutes = require("../helper/apiRoute");
 
 // Add blog by Admin
 exports.addBlog = async (req, res) => {
   try {
-    const { error, value } = addBlogValidation.validate(req.body);
-    if (error) {
-      return res.status(responseStatusCode.FORBIDDEN).json({
-        status: responseStatusText.ERROR,
-        message: error.details[0].message,
-      });
-    }
-    if (!req.file) {
-      return res.status(responseStatusCode.FORBIDDEN).json({
-        status: responseStatusText.ERROR,
-        message: "No image selected",
-      });
-    }
-    const blog = new blogModel({
-      blogTitle: value.blogTitle,
-      blogDescription: value.blogDescription,
-      blogImage: req.file.filename,
-    });
-    await blog.save();
+    // const { error, value } = addBlogValidation.validate(req.body);
+    console.log("🚀 ~ exports.addBlog= ~ req.body:", req.body)
+    console.log("🚀 ~ exports.addBlog= ~ req.file:", req.file)
+    // if (error) {
+    //   return res.status(responseStatusCode.FORBIDDEN).json({
+    //     status: responseStatusText.ERROR,
+    //     message: error.details[0].message,
+    //   });
+    // }
+    // if (!req.file) {
+    //   return res.status(responseStatusCode.FORBIDDEN).json({
+    //     status: responseStatusText.ERROR,
+    //     message: "No image selected",
+    //   });
+    // }
+    // const blog = new blogModel({
+    //   blogTitle: value.blogTitle,
+    //   blogDescription: value.blogDescription,
+    //   blogImage: req.file.filename,
+    // });
+    // await blog.save();
     return res.status(responseStatusCode.SUCCESS).json({
       status: responseStatusText.SUCCESS,
       message: "Blog added successfully",
@@ -37,6 +40,18 @@ exports.addBlog = async (req, res) => {
   } catch (error) {
     console.log("🚀 ~ exports.addBlog= ~ error:", error);
     fs.unlinkSync(path.join(__dirname, `../public/blog/${req.file.filename}`));
+    return res.status(responseStatusCode.INTERNAL_SERVER).json({
+      status: responseStatusText.ERROR,
+      message: error.message,
+    });
+  }
+};
+
+exports.addBlogPageRender = async (req, res) => {
+  try {
+    const currentPage = apiRoutes.CONTACT_LIST;
+    return res.render("addBlog", { currentPage });
+  } catch (error) {
     return res.status(responseStatusCode.INTERNAL_SERVER).json({
       status: responseStatusText.ERROR,
       message: error.message,

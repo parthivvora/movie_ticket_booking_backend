@@ -14,10 +14,13 @@
     <title>Admin Panel</title>
     <link rel="icon" href="/images/favicon.png" type="image/x-icon" />
     <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/dropzone.css" />
+    <link rel="stylesheet" href="/css/bootstrap-select.css" />
     <link rel="stylesheet" href="/css/jquery-jvectormap-2.0.3.min.css" />
     <link rel="stylesheet" href="/css/morris.min.css" />
     <link rel="stylesheet" href="/css/dataTables.bootstrap4.min.css" />
     <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/blog.css" />
     <link rel="stylesheet" href="/css/color_skins.css" />
   </head>
   <body class="theme-cyan">
@@ -94,12 +97,15 @@
               >
                 <a href="/admin/contact-list"><span>Contacts</span></a>
               </li>
-              <li>
+              <li
+                class="<%= (currentPage === '/admin/add-blog' || currentPage === '/admin/get-blog') ? 'active open' : '' %>"
+              >
                 <a href="javascript:void(0);" class="menu-toggle"
-                  ><span>Get</span>
+                  ><span>Blog</span>
                 </a>
                 <ul class="ml-menu">
-                  <li><a href="doctors.html">All Doctors</a></li>
+                  <li><a href="/admin/add-blog">Add Blog</a></li>
+                  <li><a href="/admin/get-blog">All Blog</a></li>
                 </ul>
               </li>
             </ul>

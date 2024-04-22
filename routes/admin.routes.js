@@ -14,6 +14,7 @@ const {
   getAllBlogs,
   deleteBlogById,
   updateBlogById,
+  addBlogPageRender,
 } = require("../controllers/blog.controller");
 const { addMovie } = require("../controllers/movie.controller");
 const {
@@ -86,12 +87,8 @@ router.get("/contact-list", getContactInformation);
 router.get("/subscribe-list", getSubscribeDetails);
 
 // Blog
-router.post(
-  "/add-blog",
-
-  blogImageUpload.single("blogImage"),
-  addBlog
-);
+router.post("/add-blog", blogImageUpload.single("blogImage"), addBlog);
+router.get("/add-blog", addBlogPageRender);
 router.get("/get-blog", getAllBlogs);
 router.delete("/delete-blog/:blogId", deleteBlogById);
 router.put(

@@ -12,6 +12,7 @@ const storage = multer.diskStorage({
     cb(null, destinationPath);
   },
   filename: (req, file, cb) => {
+    console.log("🚀 ~ file:", file)
     const extension = file.originalname.split(".").pop();
     const filename = `${uuidv4()}.${extension}`;
     cb(null, filename);

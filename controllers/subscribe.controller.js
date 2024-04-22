@@ -1,3 +1,4 @@
+const apiRoutes = require("../helper/apiRoute");
 const {
   responseStatusCode,
   responseStatusText,
@@ -25,11 +26,13 @@ exports.addSubscribeDetails = async (req, res) => {
 exports.getSubscribeDetails = async (req, res) => {
   try {
     const subscribeData = await subscribeModel.find().select("-__v");
-    return res.status(responseStatusCode.SUCCESS).json({
-      status: responseStatusText.SUCCESS,
-      message: "Subscribe information fetched successfully",
-      subscribeData,
-    });
+    const currentPage = apiRoutes.SUBSCRIBE_LIST;
+    return res.render("subscribeList", { subscribeData, currentPage });
+    // return res.status(responseStatusCode.SUCCESS).json({
+    //   status: responseStatusText.SUCCESS,
+    //   message: "Subscribe information fetched successfully",
+    //   subscribeData,
+    // });
   } catch (error) {
     console.log("🚀 ~ exports.getSubscribeDetails= ~ error:", error);
     return res.status(responseStatusCode.INTERNAL_SERVER).json({

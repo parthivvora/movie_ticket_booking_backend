@@ -6,6 +6,7 @@ const {
 const adminModel = require("../models/admin.model");
 const { adminLoginValidation } = require("../validations/admin.validation");
 const userModel = require("../models/user.model");
+const apiRoutes = require("../helper/apiRoute");
 
 // Admin login
 exports.getAdminLogin = (req, res, next) => {
@@ -27,7 +28,7 @@ exports.getAdminLogin = (req, res, next) => {
 // Dashboard
 exports.getDashboard = (req, res, next) => {
   try {
-    const currentPage = "/admin/dashboard";
+    const currentPage = apiRoutes.DASHBOARD;
     return res.render("home", { currentPage });
   } catch (error) {
     console.log("🚀 ~ error:", error);
@@ -37,7 +38,7 @@ exports.getDashboard = (req, res, next) => {
 exports.getUserLists = async (req, res) => {
   try {
     const userDataList = await userModel.find().select("-__v");
-    const currentPage = "/admin/user-list";
+    const currentPage = apiRoutes.USER_LIST;
     return res.render("getUsersList", { userDataList, currentPage });
     // return res.status(responseStatusCode.SUCCESS).json({
     //   status: responseStatusText.SUCCESS,

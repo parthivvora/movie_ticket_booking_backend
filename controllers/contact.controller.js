@@ -1,3 +1,4 @@
+const apiRoutes = require("../helper/apiRoute");
 const {
   responseStatusCode,
   responseStatusText,
@@ -33,11 +34,13 @@ exports.addContactInformation = async (req, res) => {
 exports.getContactInformation = async (req, res) => {
   try {
     const contactQueryData = await contactModel.find().select("-__v");
-    return res.status(responseStatusCode.SUCCESS).json({
-      status: responseStatusText.SUCCESS,
-      message: "Contact information fetched successfully",
-      contactQueryData,
-    });
+    const currentPage = apiRoutes.CONTACT_LIST;
+    return res.render("contactList", { contactQueryData, currentPage });
+    // return res.status(responseStatusCode.SUCCESS).json({
+    //   status: responseStatusText.SUCCESS,
+    //   message: "Contact information fetched successfully",
+    //   contactQueryData,
+    // });
   } catch (error) {
     console.log("🚀 ~ exports.getContactInformation= ~ error:", error);
     return res.status(responseStatusCode.INTERNAL_SERVER).json({

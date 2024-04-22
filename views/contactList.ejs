@@ -1,0 +1,75 @@
+<%- include('header') %>
+
+<section class="content">
+  <div class="block-header">
+    <div class="row">
+      <div class="col-lg-7 col-md-5 col-sm-12">
+        <h2>
+          Users
+          <small class="text-muted">Welcome to Boleto</small>
+        </h2>
+      </div>
+      <div class="col-lg-5 col-md-7 col-sm-12">
+        <ul class="breadcrumb float-md-right">
+          <li class="breadcrumb-item">
+            <a href="/admin/dashboard"><i class="zmdi zmdi-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active">Users</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row clearfix">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2><strong>List</strong></h2>
+          </div>
+          <div class="body">
+            <div class="table-responsive">
+              <table
+                class="table table-bordered table-striped table-hover js-basic-example dataTable"
+              >
+                <thead>
+                  <tr>
+                    <th>Id</th>
+                    <th>User Name</th>
+                    <th>User Email</th>
+                    <th>User Message</th>
+                    <th>Date</th>
+                    <th>Time</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% contactQueryData.forEach(contact => { %>
+                  <tr>
+                    <td><%= contact._id %></td>
+                    <td><%= contact.name %></td>
+                    <td><%= contact.email %></td>
+                    <td><%= contact.message %></td>
+                    <td>
+                      <% const dateOptions = { day: '2-digit', month: '2-digit',
+                      year: 'numeric' }; %> <%= new
+                      Date(contact.createdAt).toLocaleDateString('en-IN',
+                      dateOptions) %>
+                    </td>
+                    <td>
+                      <% const timeOptions = { hour: '2-digit', minute:
+                      '2-digit', second: '2-digit', hour12: false }; %> <%= new
+                      Date(contact.createdAt).toLocaleTimeString('en-IN',
+                      timeOptions) %>
+                    </td>
+                  </tr>
+                  <% }); %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('footer') %>

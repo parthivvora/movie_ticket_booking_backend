@@ -7,6 +7,7 @@ const {
   getUserLists,
   getAdminLogin,
   postAdminLogin,
+  getDashboard,
 } = require("../controllers/admin.controller");
 const {
   addBlog,
@@ -27,10 +28,22 @@ const { adminAuth } = require("../middleware/adminAuth");
 const blogImageUpload = require("../middleware/blogImageUpload");
 const upload = require("../middleware/movieImagesUpload");
 const { isAuthenticated } = require("../middleware/check");
-const { addTheater, getAllTheaters } = require("../controllers/theater.controller");
-const { addMovieShowType, getAllMovieShowType } = require("../controllers/movieShowType.controller");
-const { addScreen, getAllScreens } = require("../controllers/screen.controller");
-const { getAllShowTime, addShowTimes } = require("../controllers/showTime.controller");
+const {
+  addTheater,
+  getAllTheaters,
+} = require("../controllers/theater.controller");
+const {
+  addMovieShowType,
+  getAllMovieShowType,
+} = require("../controllers/movieShowType.controller");
+const {
+  addScreen,
+  getAllScreens,
+} = require("../controllers/screen.controller");
+const {
+  getAllShowTime,
+  addShowTimes,
+} = require("../controllers/showTime.controller");
 require("../middleware/localStrategy");
 const router = express();
 
@@ -54,14 +67,15 @@ router.get("/login", getAdminLogin);
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/admin/dashboard",
+    successRedirect: "/admin/home",
     failureRedirect: "/admin/login",
     failureFlash: true,
-  }),
-  postAdminLogin
+  })
 );
-
 router.get("/get-user-list", isAuthenticated, getUserLists);
+
+// Dashboard
+router.get("/dashboard", getDashboard);
 
 // Contact
 router.get("/get-contact-information", adminAuth, getContactInformation);

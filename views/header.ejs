@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no"
+      name="viewport"
+    />
+    <meta
+      name="description"
+      content="Responsive Bootstrap 4 and web Application ui kit."
+    />
+    <title>Admin Panel</title>
+    <link rel="icon" href="/images/favicon.png" type="image/x-icon" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/css/jquery-jvectormap-2.0.3.min.css" />
+    <link rel="stylesheet" href="/css/morris.min.css" />
+    <link rel="stylesheet" href="/css/main.css" />
+    <link rel="stylesheet" href="/css/color_skins.css" />
+  </head>
+  <body class="theme-cyan">
+    <div class="page-loader-wrapper">
+      <div class="loader">
+        <div class="m-t-30">
+          <img
+            class="zmdi-hc-spin"
+            src="https://thememakker.com/templates/oreo/hospital/html/assets/images/logo.svg"
+            width="48"
+            height="48"
+            alt="Oreo"
+          />
+        </div>
+        <p>Please wait...</p>
+      </div>
+    </div>
+    <div class="overlay"></div>
+    <nav class="navbar p-l-5 p-r-5">
+      <ul class="nav navbar-nav navbar-left">
+        <li>
+          <div class="navbar-header">
+            <a href="javascript:void(0);" class="bars"></a>
+            <a class="navbar-brand" href="index.html"
+              ><img
+                src="https://thememakker.com/templates/oreo/hospital/html/assets/images/logo.svg"
+                width="30"
+                alt="Oreo"
+              /><span class="m-l-10">Oreo</span></a
+            >
+          </div>
+        </li>
+        <li>
+          <a href="javascript:void(0);" class="ls-toggle-btn" data-close="true"
+            ><i class="zmdi zmdi-swap"></i
+          ></a>
+        </li>
+        <li class="float-right">
+          <a href="sign-in.html" class="mega-menu" data-close="true"
+            ><i class="zmdi zmdi-power"></i
+          ></a>
+        </li>
+      </ul>
+    </nav>
+    <aside id="leftsidebar" class="sidebar">
+      <div class="tab-content">
+        <div class="tab-pane stretchRight active" id="dashboard">
+          <div class="menu">
+            <ul class="list">
+              <li>
+                <div class="user-info">
+                  <div class="detail mt-3">
+                    <h4>Admin</h4>
+                  </div>
+                </div>
+              </li>
+              <li class="active open">
+                <a href="index.html"
+                  ><i class="zmdi zmdi-home"></i><span>Dashboard</span></a
+                >
+              </li>
+              <li>
+                <a href="javascript:void(0);" class="menu-toggle"
+                  ><i class="zmdi zmdi-account-add"></i><span>Doctors</span>
+                </a>
+                <ul class="ml-menu">
+                  <li><a href="doctors.html">All Doctors</a></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </aside>

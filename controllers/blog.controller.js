@@ -12,44 +12,51 @@ const apiRoutes = require("../helper/apiRoute");
 // Add blog by Admin
 exports.addBlog = async (req, res) => {
   try {
-    // const { error, value } = addBlogValidation.validate(req.body);
-    console.log("🚀 ~ exports.addBlog= ~ req.body:", req.body)
-    console.log("🚀 ~ exports.addBlog= ~ req.file:", req.file)
-    // if (error) {
-    //   return res.status(responseStatusCode.FORBIDDEN).json({
-    //     status: responseStatusText.ERROR,
-    //     message: error.details[0].message,
-    //   });
-    // }
-    // if (!req.file) {
-    //   return res.status(responseStatusCode.FORBIDDEN).json({
-    //     status: responseStatusText.ERROR,
-    //     message: "No image selected",
-    //   });
-    // }
-    // const blog = new blogModel({
-    //   blogTitle: value.blogTitle,
-    //   blogDescription: value.blogDescription,
-    //   blogImage: req.file.filename,
-    // });
-    // await blog.save();
-    return res.status(responseStatusCode.SUCCESS).json({
-      status: responseStatusText.SUCCESS,
-      message: "Blog added successfully",
+    const { error, value } = addBlogValidation.validate(req.body);
+    if (error) {
+      // return res.status(responseStatusCode.FORBIDDEN).json({
+      //   status: responseStatusText.ERROR,
+      //   message: error.details[0].message,
+      // });
+      req.flash("error", error.details[0].message);
+      fs.unlinkSync(
+        path.join(__dirname, `../public/blog/${req.file.filename}`)
+      );
+      return res.redirect("/admin/add-blog");
+    }
+    if (!req.file) {
+      // return res.status(responseStatusCode.FORBIDDEN).json({
+      //   status: responseStatusText.ERROR,
+      //   message: "Please upload blog image",
+      // });
+      req.flash("error", "Please upload blog image");
+    }
+    const blog = new blogModel({
+      blogTitle: value.blogTitle,
+      blogDescription: value.blogDescription,
+      blogImage: req.file.filename,
     });
+    await blog.save();
+    req.flash("success", "Blog added successfully");
+    return res.redirect("/admin/add-blog");
+    // return res.status(responseStatusCode.SUCCESS).json({
+    //   status: responseStatusText.SUCCESS,
+    //   message: "Blog added successfully",
+    // });
   } catch (error) {
     console.log("🚀 ~ exports.addBlog= ~ error:", error);
     fs.unlinkSync(path.join(__dirname, `../public/blog/${req.file.filename}`));
-    return res.status(responseStatusCode.INTERNAL_SERVER).json({
-      status: responseStatusText.ERROR,
-      message: error.message,
-    });
+    req.flash("error", error.message);
+    // return res.status(responseStatusCode.INTERNAL_SERVER).json({
+    //   status: responseStatusText.ERROR,
+    //   message: error.message,
+    // });
   }
 };
 
 exports.addBlogPageRender = async (req, res) => {
   try {
-    const currentPage = apiRoutes.CONTACT_LIST;
+    const currentPage = apiRoutes.ADD_BLOG;
     return res.render("addBlog", { currentPage });
   } catch (error) {
     return res.status(responseStatusCode.INTERNAL_SERVER).json({
@@ -64,22 +71,23 @@ exports.getAllBlogs = async (req, res) => {
   try {
     const blogData = await blogModel.find().select("-__v");
     if (blogData.length > 0) {
-      var raw = "";
       Object.keys(blogData).forEach((key) => {
         blogData[key][
           "blogImage"
         ] = `${process.env.IMAGE_URL}/blog/${blogData[key]["blogImage"]}`;
       });
-      return res.status(responseStatusCode.SUCCESS).json({
-        status: responseStatusText.SUCCESS,
-        message: "Blog data fetched successfully",
-        data: blogData,
-      });
+      const currentPage = apiRoutes.ALL_BLOG;
+      return res.render("viewBlogs", { blogData, currentPage });
+      // return res.status(responseStatusCode.SUCCESS).json({
+      //   status: responseStatusText.SUCCESS,
+      //   message: "Blog data fetched successfully",
+      //   data: blogData,
+      // });
     }
-    return res.status(responseStatusCode.SUCCESS).json({
-      status: responseStatusText.SUCCESS,
-      message: "No blog data found",
-    });
+    // return res.status(responseStatusCode.SUCCESS).json({
+    //   status: responseStatusText.SUCCESS,
+    //   message: "No blog data found",
+    // });
   } catch (error) {
     console.log("🚀 ~ exports.getAllBlogs= ~ error:", error);
     return res.status(responseStatusCode.INTERNAL_SERVER).json({
@@ -154,7 +162,7 @@ exports.updateBlogById = async (req, res) => {
       message: "Blog updated successfully",
     });
   } catch (error) {
-    console.log("🚀 ~ exports.deleteBlogById ~ error:", error);
+    console.log("🚀 ~ exports.updateBlogById= ~ error:", error)
     return res.status(responseStatusCode.INTERNAL_SERVER).json({
       status: responseStatusText.ERROR,
       message: error.message,

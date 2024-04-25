@@ -11,10 +11,7 @@ const apiRoutes = require("../helper/apiRoute");
 // Admin login
 exports.getAdminLogin = (req, res, next) => {
   try {
-    return res.render("login", {
-      message: req.flash("message"),
-      error: req.flash("error"),
-    });
+    return res.render("login");
   } catch (error) {
     console.log("🚀 ~ exports.getAdminLogin= ~ error:", error);
     // return res.status(responseStatusCode.INTERNAL_SERVER).json({

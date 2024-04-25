@@ -1,7 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-const flash = require("connect-flash");
+const flash = require('express-flash');
 const app = express();
 const db = require("./utils/dbConfig");
 

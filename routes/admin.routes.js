@@ -68,32 +68,41 @@ router.get("/login", getAdminLogin);
 router.post(
   "/login",
   passport.authenticate("local", {
-    successRedirect: "/admin/home",
+    successRedirect: "/admin/dashboard",
     failureRedirect: "/admin/login",
     failureFlash: true,
   })
 );
+router.get("/logout", (req, res) => {
+  res.clearCookie("admin");
+  return res.render("login");
+});
 
 // Get all users list
-router.get("/user-list", getUserLists);
+router.get("/user-list", isAuthenticated, getUserLists);
 
 // Dashboard
-router.get("/dashboard", getDashboard);
+router.get("/dashboard", isAuthenticated, getDashboard);
 
 // Get all contact information
-router.get("/contact-list", getContactInformation);
+router.get("/contact-list", isAuthenticated, getContactInformation);
 
 // Get all subscribes information
-router.get("/subscribe-list", getSubscribeDetails);
+router.get("/subscribe-list", isAuthenticated, getSubscribeDetails);
 
 // Blog
-router.post("/add-blog", blogImageUpload.single("blogImage"), addBlog);
-router.get("/add-blog", addBlogPageRender);
-router.get("/get-blog", getAllBlogs);
-router.delete("/delete-blog/:blogId", deleteBlogById);
+router.post(
+  "/add-blog",
+  isAuthenticated,
+  blogImageUpload.single("blogImage"),
+  addBlog
+);
+router.get("/add-blog", isAuthenticated, addBlogPageRender);
+router.get("/get-blog", isAuthenticated, getAllBlogs);
+router.delete("/delete-blog/:blogId", isAuthenticated, deleteBlogById);
 router.put(
   "/update-blog/:blogId",
-
+  isAuthenticated,
   blogImageUpload.single("blogImage"),
   updateBlogById
 );
@@ -101,7 +110,6 @@ router.put(
 // Add Movie
 router.post(
   "/add-movie",
-
   upload.fields([
     { name: "movieBanner", maxCount: 1 },
     { name: "movieThumbImg", maxCount: 1 },

@@ -21,3 +21,5 @@ router.get("/get-blog-user", getAllBlogsByUser);
 router.get("/get-blog/:blogId", getSingleBlogByUser);
 
 module.exports = router;
+
+// action="/admin/update-blog"

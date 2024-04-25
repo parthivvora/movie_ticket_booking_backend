@@ -24,6 +24,15 @@
       <div class="col-lg-12">
         <div class="card">
           <div class="body">
+            <% if (messages.success) { %>
+            <div class="alert alert-success" role="alert">
+              <%= messages.success %>
+            </div>
+            <% } %> <% if (messages.error) { %>
+            <div class="alert alert-danger" role="alert">
+              <%= messages.error %>
+            </div>
+            <% } %>
             <form
               action="/admin/add-blog"
               id="frmFileUpload"
@@ -53,8 +62,8 @@
                   <h3>Drop files here or click to upload.</h3>
                 </div>
               </div>
-              <div class="fallback">
-                <input type="file" name="blogImage" />
+              <div class="">
+                <input type="file" name="blogImage" accept="image/*" />
               </div>
               <button
                 type="submit"

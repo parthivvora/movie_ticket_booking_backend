@@ -136,6 +136,7 @@
 }
 .theme-cyan .block-header h2 {
   color: #fff;
+  position: relative;
 }
 .theme-cyan .block-header h2 small {
   color: #fff;

@@ -25,6 +25,7 @@ const {
 const {
   getAllMovieType,
   addMovieType,
+  addMovieTypePageRender,
 } = require("../controllers/movieType.controller");
 const { adminAuth } = require("../middleware/adminAuth");
 const blogImageUpload = require("../middleware/blogImageUpload");
@@ -124,8 +125,9 @@ router.post("/add-language", isAuthenticated, addLanguage);
 router.get("/get-language", isAuthenticated, getAllLanguage);
 
 // Add Movie Type
-router.post("/add-movieType", addMovieType);
-router.get("/get-movieType", getAllMovieType);
+router.get("/add-movieType", isAuthenticated, addMovieTypePageRender);
+router.post("/add-movieType", isAuthenticated, addMovieType);
+router.get("/get-movieType", isAuthenticated, getAllMovieType);
 
 // Add Theater
 router.post("/add-theater", addTheater);

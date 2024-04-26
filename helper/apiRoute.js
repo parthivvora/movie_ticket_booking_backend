@@ -7,5 +7,7 @@ const apiRoutes = {
   ALL_BLOG: "/admin/get-blog",
   ADD_LANGUAGE: "/admin/add-language",
   ALL_LANGUAGE: "/admin/get-language",
+  ADD_MOVIE_TYPE: "/admin/add-movieType",
+  ALL_MOVIE_TYPE: "/admin/get-movieType",
 };
 module.exports = apiRoutes;

@@ -121,6 +121,17 @@
                   <li><a href="/admin/get-blog">All Blog</a></li>
                 </ul>
               </li>
+              <li
+                class="<%= (currentPage === '/admin/add-language' || currentPage === '/admin/get-language') ? 'active open' : '' %>"
+              >
+                <a href="javascript:void(0);" class="menu-toggle"
+                  ><span>Language</span>
+                </a>
+                <ul class="ml-menu">
+                  <li><a href="/admin/add-language">Add Language</a></li>
+                  <li><a href="/admin/get-language">All Language</a></li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>

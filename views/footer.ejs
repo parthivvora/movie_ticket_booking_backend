@@ -76,7 +76,6 @@
   }
 
   function deleteBlog(blogId) {
-    console.log("🚀 ~ deleteBlog ~ blogId:", blogId);
     fetch(`/admin/delete-blog/${blogId}`, {
       method: "DELETE",
     })
@@ -92,6 +91,7 @@
         }
       });
   }
+  
   function closeDeleteBlogMsg() {
     document.getElementById("toast-body").innerHTML = "";
     document.getElementById("liveToast").style.opacity = 0;

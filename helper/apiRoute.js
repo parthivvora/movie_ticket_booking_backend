@@ -5,5 +5,7 @@ const apiRoutes = {
   SUBSCRIBE_LIST: "/admin/subscribe-list",
   ADD_BLOG: "/admin/add-blog",
   ALL_BLOG: "/admin/get-blog",
+  ADD_LANGUAGE: "/admin/add-language",
+  ALL_LANGUAGE: "/admin/get-language",
 };
 module.exports = apiRoutes;

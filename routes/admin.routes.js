@@ -20,6 +20,7 @@ const { addMovie } = require("../controllers/movie.controller");
 const {
   addLanguage,
   getAllLanguage,
+  addLanguagePageRender,
 } = require("../controllers/language.controller");
 const {
   getAllMovieType,
@@ -118,8 +119,9 @@ router.post(
 );
 
 // Add Language
-router.post("/add-language", addLanguage);
-router.get("/get-language", getAllLanguage);
+router.get("/add-language", isAuthenticated, addLanguagePageRender);
+router.post("/add-language", isAuthenticated, addLanguage);
+router.get("/get-language", isAuthenticated, getAllLanguage);
 
 // Add Movie Type
 router.post("/add-movieType", addMovieType);

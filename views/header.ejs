@@ -143,6 +143,17 @@
                   <li><a href="/admin/get-movieType">All Movie Type</a></li>
                 </ul>
               </li>
+              <li
+                class="<%= (currentPage === '/admin/add-movieShowType' || currentPage === '/admin/get-movieShowType') ? 'active open' : '' %>"
+              >
+                <a href="javascript:void(0);" class="menu-toggle"
+                  ><span>Movie Show Type</span>
+                </a>
+                <ul class="ml-menu">
+                  <li><a href="/admin/add-movieShowType">Add Movie Show Type</a></li>
+                  <li><a href="/admin/get-movieShowType">All Movie Show Type</a></li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>

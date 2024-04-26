@@ -9,5 +9,7 @@ const apiRoutes = {
   ALL_LANGUAGE: "/admin/get-language",
   ADD_MOVIE_TYPE: "/admin/add-movieType",
   ALL_MOVIE_TYPE: "/admin/get-movieType",
+  ADD_MOVIE_SHOW_TYPE: "/admin/add-movieShowType",
+  ALL_MOVIE_SHOW_TYPE: "/admin/get-movieShowType",
 };
 module.exports = apiRoutes;

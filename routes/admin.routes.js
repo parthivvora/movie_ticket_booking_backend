@@ -38,6 +38,7 @@ const {
 const {
   addMovieShowType,
   getAllMovieShowType,
+  addMovieShowTypePageRender,
 } = require("../controllers/movieShowType.controller");
 const {
   addScreen,
@@ -134,8 +135,9 @@ router.post("/add-theater", addTheater);
 router.get("/get-theater", getAllTheaters);
 
 // Add Movie Show Type
-router.post("/add-movieShowType", addMovieShowType);
-router.get("/get-movieShowType", getAllMovieShowType);
+router.get("/add-movieShowType", isAuthenticated, addMovieShowTypePageRender);
+router.post("/add-movieShowType", isAuthenticated, addMovieShowType);
+router.get("/get-movieShowType", isAuthenticated, getAllMovieShowType);
 
 // Add Screen
 router.post("/add-screen", addScreen);

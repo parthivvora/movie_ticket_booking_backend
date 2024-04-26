@@ -1,3 +1,4 @@
+const apiRoutes = require("../helper/apiRoute");
 const {
   responseStatusCode,
   responseStatusText,
@@ -10,10 +11,12 @@ exports.addTheater = async (req, res) => {
   try {
     const { error, value } = addTheaterValidation.validate(req.body);
     if (error) {
-      return res.status(responseStatusCode.FORBIDDEN).json({
-        status: responseStatusText.ERROR,
-        message: error.details[0].message,
-      });
+      req.flash("error", error.details[0].message);
+      return res.redirect(apiRoutes.ADD_THEATER);
+      // return res.status(responseStatusCode.FORBIDDEN).json({
+      //   status: responseStatusText.ERROR,
+      //   message: error.details[0].message,
+      // });
     }
     const theater = new theaterModel({
       theaterName: value.theaterName,
@@ -22,11 +25,26 @@ exports.addTheater = async (req, res) => {
     });
     const result = await theater.save();
     if (result) {
-      return res.status(responseStatusCode.SUCCESS).json({
-        status: responseStatusText.SUCCESS,
-        message: "Theater added successfully",
-      });
+      req.flash("success", "Theater added successfully");
+      return res.redirect(apiRoutes.ADD_THEATER);
+      // return res.status(responseStatusCode.SUCCESS).json({
+      //   status: responseStatusText.SUCCESS,
+      //   message: "Theater added successfully",
+      // });
     }
+  } catch (error) {
+    console.log("🚀 ~ exports.addTheater= ~ error:", error);
+    return res.status(responseStatusCode.INTERNAL_SERVER).json({
+      status: responseStatusText.ERROR,
+      message: error.message,
+    });
+  }
+};
+
+exports.addTheaterPageRender = async (req, res) => {
+  try {
+    const currentPage = apiRoutes.ADD_THEATER;
+    return res.render("addTheater", { currentPage });
   } catch (error) {
     console.log("🚀 ~ exports.addTheater= ~ error:", error);
     return res.status(responseStatusCode.INTERNAL_SERVER).json({
@@ -41,11 +59,16 @@ exports.getAllTheaters = async (req, res) => {
   try {
     const theaterData = await theaterModel.find().select("-__v");
     if (theaterData.length > 0) {
-      return res.status(responseStatusCode.SUCCESS).json({
-        status: responseStatusText.SUCCESS,
-        message: "Theater fetched successfully",
+      const currentPage = apiRoutes.ALL_THEATER;
+      return res.render("viewTheater", {
         theaterData,
+        currentPage,
       });
+      // return res.status(responseStatusCode.SUCCESS).json({
+      //   status: responseStatusText.SUCCESS,
+      //   message: "Theater fetched successfully",
+      //   theaterData,
+      // });
     }
     return res.status(responseStatusCode.SUCCESS).json({
       status: responseStatusText.SUCCESS,

@@ -34,6 +34,7 @@ const { isAuthenticated } = require("../middleware/check");
 const {
   addTheater,
   getAllTheaters,
+  addTheaterPageRender,
 } = require("../controllers/theater.controller");
 const {
   addMovieShowType,
@@ -131,8 +132,9 @@ router.post("/add-movieType", isAuthenticated, addMovieType);
 router.get("/get-movieType", isAuthenticated, getAllMovieType);
 
 // Add Theater
-router.post("/add-theater", addTheater);
-router.get("/get-theater", getAllTheaters);
+router.get("/add-theater", isAuthenticated, addTheaterPageRender);
+router.post("/add-theater", isAuthenticated, addTheater);
+router.get("/get-theater", isAuthenticated, getAllTheaters);
 
 // Add Movie Show Type
 router.get("/add-movieShowType", isAuthenticated, addMovieShowTypePageRender);

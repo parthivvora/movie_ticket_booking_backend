@@ -154,6 +154,17 @@
                   <li><a href="/admin/get-movieShowType">All Movie Show Type</a></li>
                 </ul>
               </li>
+              <li
+                class="<%= (currentPage === '/admin/add-theater' || currentPage === '/admin/get-theater') ? 'active open' : '' %>"
+              >
+                <a href="javascript:void(0);" class="menu-toggle"
+                  ><span>Theaters</span>
+                </a>
+                <ul class="ml-menu">
+                  <li><a href="/admin/add-theater">Add Theaters</a></li>
+                  <li><a href="/admin/get-theater">All Theaters</a></li>
+                </ul>
+              </li>
             </ul>
           </div>
         </div>

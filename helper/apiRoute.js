@@ -11,5 +11,7 @@ const apiRoutes = {
   ALL_MOVIE_TYPE: "/admin/get-movieType",
   ADD_MOVIE_SHOW_TYPE: "/admin/add-movieShowType",
   ALL_MOVIE_SHOW_TYPE: "/admin/get-movieShowType",
+  ADD_THEATER: "/admin/add-theater",
+  ALL_THEATER: "/admin/get-theater",
 };
 module.exports = apiRoutes;

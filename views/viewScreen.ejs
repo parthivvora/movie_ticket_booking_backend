@@ -1,0 +1,59 @@
+<%- include('header') %>
+
+<section class="content">
+  <div class="block-header">
+    <div class="row">
+      <div class="col-lg-7 col-md-5 col-sm-12">
+        <h2>
+          Theaters
+          <small class="text-muted">Welcome to Boleto</small>
+        </h2>
+      </div>
+      <div class="col-lg-5 col-md-7 col-sm-12">
+        <ul class="breadcrumb float-md-right">
+          <li class="breadcrumb-item">
+            <a href="/admin/dashboard"><i class="zmdi zmdi-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active">Theater</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row clearfix">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2><strong>List</strong></h2>
+          </div>
+          <div class="body">
+            <div class="table-responsive">
+              <table
+                class="table table-bordered table-striped table-hover js-basic-example dataTable"
+              >
+                <thead>
+                  <tr>
+                    <th>Screen Id</th>
+                    <th>Screen Name</th>
+                    <th>Theater Id</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% screenData.forEach(screen => { %>
+                  <tr>
+                    <td><%= screen._id %></td>
+                    <td><%= screen.screensName %></td>
+                    <td><%= screen.theaterId %></td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('footer') %>

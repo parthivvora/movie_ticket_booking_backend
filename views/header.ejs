@@ -150,8 +150,12 @@
                   ><span>Movie Show Type</span>
                 </a>
                 <ul class="ml-menu">
-                  <li><a href="/admin/add-movieShowType">Add Movie Show Type</a></li>
-                  <li><a href="/admin/get-movieShowType">All Movie Show Type</a></li>
+                  <li>
+                    <a href="/admin/add-movieShowType">Add Movie Show Type</a>
+                  </li>
+                  <li>
+                    <a href="/admin/get-movieShowType">All Movie Show Type</a>
+                  </li>
                 </ul>
               </li>
               <li
@@ -163,6 +167,17 @@
                 <ul class="ml-menu">
                   <li><a href="/admin/add-theater">Add Theaters</a></li>
                   <li><a href="/admin/get-theater">All Theaters</a></li>
+                </ul>
+              </li>
+              <li
+                class="<%= (currentPage === '/admin/add-screen' || currentPage === '/admin/get-screen') ? 'active open' : '' %>"
+              >
+                <a href="javascript:void(0);" class="menu-toggle"
+                  ><span>Screens</span>
+                </a>
+                <ul class="ml-menu">
+                  <li><a href="/admin/add-screen">Add Screens</a></li>
+                  <li><a href="/admin/get-screen">All Screens</a></li>
                 </ul>
               </li>
             </ul>

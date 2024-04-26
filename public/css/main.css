@@ -20178,3 +20178,14 @@ section small {
 .modal-backdrop {
   background-color: unset !important;
 }
+
+.form-select {
+  border: none !important;
+  width: 20% !important;
+  background-image: none;
+  padding: 0px;
+}
+
+.form-select button{
+  border-radius: .25rem !important;
+}

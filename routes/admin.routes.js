@@ -44,6 +44,7 @@ const {
 const {
   addScreen,
   getAllScreens,
+  addScreenPageRender,
 } = require("../controllers/screen.controller");
 const {
   getAllShowTime,
@@ -142,8 +143,9 @@ router.post("/add-movieShowType", isAuthenticated, addMovieShowType);
 router.get("/get-movieShowType", isAuthenticated, getAllMovieShowType);
 
 // Add Screen
-router.post("/add-screen", addScreen);
-router.get("/get-screen", getAllScreens);
+router.get("/add-screen", isAuthenticated, addScreenPageRender);
+router.post("/add-screen", isAuthenticated, addScreen);
+router.get("/get-screen", isAuthenticated, getAllScreens);
 
 // Add Show Time of Movie
 router.post("/add-showTime", addShowTimes);

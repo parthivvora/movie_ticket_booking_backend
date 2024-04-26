@@ -1,19 +1,37 @@
+const apiRoutes = require("../helper/apiRoute");
 const {
   responseStatusCode,
   responseStatusText,
 } = require("../helper/responseHelper");
 const screensModel = require("../models/screens.model");
+const theaterModel = require("../models/theater.model");
 
 // Add screen by Admin
 exports.addScreen = async (req, res) => {
   try {
     await screensModel.create(req.body);
-    return res.status(responseStatusCode.SUCCESS).json({
-      status: responseStatusText.SUCCESS,
-      message: "Screen added successfully",
-    });
+    req.flash("success", "Screen added successfully");
+    return res.redirect(apiRoutes.ADD_SCREEN);
+    // return res.status(responseStatusCode.SUCCESS).json({
+    //   status: responseStatusText.SUCCESS,
+    //   message: "Screen added successfully",
+    // });
   } catch (error) {
-    console.log("🚀 ~ exports.addScreen= ~ error:", error)
+    console.log("🚀 ~ exports.addScreen= ~ error:", error);
+    return res.status(responseStatusCode.INTERNAL_SERVER).json({
+      status: responseStatusText.ERROR,
+      message: error.message,
+    });
+  }
+};
+
+exports.addScreenPageRender = async (req, res) => {
+  try {
+    const currentPage = apiRoutes.ADD_SCREEN;
+    const theaterData = await theaterModel.find().select("-__v");
+    return res.render("addScreen", { currentPage, theaterData });
+  } catch (error) {
+    console.log("🚀 ~ exports.addScreen= ~ error:", error);
     return res.status(responseStatusCode.INTERNAL_SERVER).json({
       status: responseStatusText.ERROR,
       message: error.message,
@@ -26,11 +44,13 @@ exports.getAllScreens = async (req, res) => {
   try {
     const screenData = await screensModel.find().select("-__v");
     if (screenData.length > 0) {
-      return res.status(responseStatusCode.SUCCESS).json({
-        status: responseStatusText.SUCCESS,
-        message: "Screen fetched successfully",
-        screenData,
-      });
+      const currentPage = apiRoutes.ALL_SCREEN;
+      return res.render("viewScreen", { screenData, currentPage });
+      // return res.status(responseStatusCode.SUCCESS).json({
+      //   status: responseStatusText.SUCCESS,
+      //   message: "Screen fetched successfully",
+      //   screenData,
+      // });
     }
     return res.status(responseStatusCode.SUCCESS).json({
       status: responseStatusText.SUCCESS,

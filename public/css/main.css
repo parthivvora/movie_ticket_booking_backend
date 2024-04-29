@@ -20186,6 +20186,10 @@ section small {
   padding: 0px;
 }
 
-.form-select button{
-  border-radius: .25rem !important;
+.add-movie-form .form-select {
+  width: 100% !important;
+}
+
+.form-select button {
+  border-radius: 0.25rem !important;
 }

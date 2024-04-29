@@ -16,7 +16,7 @@ const {
   updateBlogById,
   addBlogPageRender,
 } = require("../controllers/blog.controller");
-const { addMovie } = require("../controllers/movie.controller");
+const { addMovie, addMoviePageRender } = require("../controllers/movie.controller");
 const {
   addLanguage,
   getAllLanguage,
@@ -50,6 +50,8 @@ const {
   getAllShowTime,
   addShowTimes,
 } = require("../controllers/showTime.controller");
+const actorImageUpload = require("../middleware/actorImageUpload");
+const { addActor, getActor } = require("../controllers/actor.controller");
 require("../middleware/localStrategy");
 const router = express();
 
@@ -113,6 +115,7 @@ router.put(
 );
 
 // Add Movie
+router.get("/add-movie", addMoviePageRender);
 router.post(
   "/add-movie",
   upload.fields([
@@ -150,5 +153,15 @@ router.get("/get-screen", isAuthenticated, getAllScreens);
 // Add Show Time of Movie
 router.post("/add-showTime", addShowTimes);
 router.get("/get-showTime", getAllShowTime);
+
+// Actor
+router.post(
+  "/add-actor",
+  // isAuthenticated,
+  actorImageUpload.single("actorImage"),
+  addActor
+);
+router.get("/get-actor", getActor);
+
 
 module.exports = router;

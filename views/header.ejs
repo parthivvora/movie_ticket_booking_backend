@@ -96,19 +96,15 @@
                 <a href="/admin/dashboard"><span>Dashboard</span></a>
               </li>
               <li
-                class="<%= currentPage === '/admin/user-list' ? 'active open' : '' %>"
+                class="<%= (currentPage === '/admin/add-movie' || currentPage === '/admin/get-movie') ? 'active open' : '' %>"
               >
-                <a href="/admin/user-list"><span>Users</span></a>
-              </li>
-              <li
-                class="<%= currentPage === '/admin/subscribe-list' ? 'active open' : '' %>"
-              >
-                <a href="/admin/subscribe-list"><span>Subscribes</span></a>
-              </li>
-              <li
-                class="<%= currentPage === '/admin/contact-list' ? 'active open' : '' %>"
-              >
-                <a href="/admin/contact-list"><span>Contacts</span></a>
+                <a href="javascript:void(0);" class="menu-toggle"
+                  ><span>Movie</span>
+                </a>
+                <ul class="ml-menu">
+                  <li><a href="/admin/add-movie">Add Movie</a></li>
+                  <li><a href="/admin/get-movie">All Movie</a></li>
+                </ul>
               </li>
               <li
                 class="<%= (currentPage === '/admin/add-blog' || currentPage === '/admin/get-blog') ? 'active open' : '' %>"
@@ -179,6 +175,32 @@
                   <li><a href="/admin/add-screen">Add Screens</a></li>
                   <li><a href="/admin/get-screen">All Screens</a></li>
                 </ul>
+              </li>
+              <li
+                class="<%= (currentPage === '/admin/add-actor' || currentPage === '/admin/get-actor') ? 'active open' : '' %>"
+              >
+                <a href="javascript:void(0);" class="menu-toggle"
+                  ><span>Actor</span>
+                </a>
+                <ul class="ml-menu">
+                  <li><a href="/admin/add-actor">Add Actor</a></li>
+                  <li><a href="/admin/get-actor">All Actor</a></li>
+                </ul>
+              </li>
+              <li
+                class="<%= currentPage === '/admin/user-list' ? 'active open' : '' %>"
+              >
+                <a href="/admin/user-list"><span>Users</span></a>
+              </li>
+              <li
+                class="<%= currentPage === '/admin/subscribe-list' ? 'active open' : '' %>"
+              >
+                <a href="/admin/subscribe-list"><span>Subscribes</span></a>
+              </li>
+              <li
+                class="<%= currentPage === '/admin/contact-list' ? 'active open' : '' %>"
+              >
+                <a href="/admin/contact-list"><span>Contacts</span></a>
               </li>
             </ul>
           </div>

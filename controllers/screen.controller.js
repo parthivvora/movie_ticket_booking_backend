@@ -42,7 +42,29 @@ exports.addScreenPageRender = async (req, res) => {
 // Get all screen by Admin
 exports.getAllScreens = async (req, res) => {
   try {
-    const screenData = await screensModel.find().select("-__v");
+    const screenData = await screensModel.aggregate([
+      {
+        $lookup: {
+          from: "theaters",
+          localField: "theaterId",
+          foreignField: "_id",
+          as: "theaterData",
+        },
+      },
+      {
+        $unwind: {
+          path: "$theaterData",
+          preserveNullAndEmptyArrays: true,
+        },
+      },
+      {
+        $project: {
+          __v: 0,
+          "theaterData.totalScreens": 0,
+          "theaterData.__v": 0,
+        },
+      },
+    ]);
     if (screenData.length > 0) {
       const currentPage = apiRoutes.ALL_SCREEN;
       return res.render("viewScreen", { screenData, currentPage });

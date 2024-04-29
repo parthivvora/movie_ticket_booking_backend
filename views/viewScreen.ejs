@@ -35,7 +35,8 @@
                   <tr>
                     <th>Screen Id</th>
                     <th>Screen Name</th>
-                    <th>Theater Id</th>
+                    <th>Theater Name</th>
+                    <th>City</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -43,7 +44,8 @@
                   <tr>
                     <td><%= screen._id %></td>
                     <td><%= screen.screensName %></td>
-                    <td><%= screen.theaterId %></td>
+                    <td><%= screen.theaterData.theaterName %></td>
+                    <td><%= screen.theaterData.city %></td>
                   </tr>
                   <% }) %>
                 </tbody>

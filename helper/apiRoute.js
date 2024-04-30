@@ -19,5 +19,7 @@ const apiRoutes = {
   ALL_MOVIE: "/admin/get-movie",
   ADD_ACTOR: "/admin/add-actor",
   ALL_ACTOR: "/admin/get-actor",
+  ADD_CREW: "/admin/add-crew",
+  ALL_CREW: "/admin/get-crew",
 };
 module.exports = apiRoutes;

@@ -16,7 +16,10 @@ const {
   updateBlogById,
   addBlogPageRender,
 } = require("../controllers/blog.controller");
-const { addMovie, addMoviePageRender } = require("../controllers/movie.controller");
+const {
+  addMovie,
+  addMoviePageRender,
+} = require("../controllers/movie.controller");
 const {
   addLanguage,
   getAllLanguage,
@@ -51,7 +54,13 @@ const {
   addShowTimes,
 } = require("../controllers/showTime.controller");
 const actorImageUpload = require("../middleware/actorImageUpload");
-const { addActor, getActor } = require("../controllers/actor.controller");
+const {
+  addActor,
+  getActor,
+  addActorPageRender,
+} = require("../controllers/actor.controller");
+const crewImageUpload = require("../middleware/crewImageUpload");
+const { addCrew, addCrewPageRender, getCrew } = require("../controllers/crew.controller");
 require("../middleware/localStrategy");
 const router = express();
 
@@ -157,11 +166,16 @@ router.get("/get-showTime", getAllShowTime);
 // Actor
 router.post(
   "/add-actor",
-  // isAuthenticated,
+  isAuthenticated,
   actorImageUpload.single("actorImage"),
   addActor
 );
-router.get("/get-actor", getActor);
+router.get("/add-actor", isAuthenticated, addActorPageRender);
+router.get("/get-actor", isAuthenticated, getActor);
 
+// Crew
+router.post("/add-crew", crewImageUpload.single("crewImage"), addCrew);
+router.get("/add-crew", addCrewPageRender);
+router.get("/get-crew", getCrew);
 
 module.exports = router;

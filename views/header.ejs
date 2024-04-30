@@ -188,6 +188,17 @@
                 </ul>
               </li>
               <li
+                class="<%= (currentPage === '/admin/add-crew' || currentPage === '/admin/get-crew') ? 'active open' : '' %>"
+              >
+                <a href="javascript:void(0);" class="menu-toggle"
+                  ><span>Crew</span>
+                </a>
+                <ul class="ml-menu">
+                  <li><a href="/admin/add-crew">Add Crew</a></li>
+                  <li><a href="/admin/get-crew">All Crew</a></li>
+                </ul>
+              </li>
+              <li
                 class="<%= currentPage === '/admin/user-list' ? 'active open' : '' %>"
               >
                 <a href="/admin/user-list"><span>Users</span></a>

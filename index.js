@@ -1,11 +1,11 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-const flash = require('express-flash');
+const flash = require("express-flash");
 const app = express();
 const db = require("./utils/dbConfig");
 
-app.set("views", "views")
+app.set("views", __dirname + "/views");
 app.set("view engine", "ejs");
 app.use(express.json());
 app.use(flash());

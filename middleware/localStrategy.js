@@ -16,8 +16,14 @@ passport.use(
         const isPasswordValid = password == admin.password;
         if (!isPasswordValid) {
           return done(null, false);
+        } else {
+          const user = {
+            id: admin.id,
+            email: admin.email,
+            isAdmin: admin.isAdmin, // Set isAdmin property
+          };
+          return done(null, user);
         }
-        return done(null, admin);
       } catch (error) {
         return done(error);
       }
@@ -26,7 +32,7 @@ passport.use(
 );
 
 passport.serializeUser((admin, done) => {
-  done(null, admin._id);
+  done(null, admin.id);
 });
 
 passport.deserializeUser(async (id, done) => {

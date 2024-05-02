@@ -1,6 +1,26 @@
-module.exports.isAuthenticated = (req, res, next) => {
+// module.exports.isAuthenticated = (req, res, next) => {
+//   if (req.isAuthenticated()) {
+//     return next();
+//   }
+//   res.redirect("/admin/login");
+// };
+
+
+module.exports.checkAdmin = (req, res, next) => {
   if (req.isAuthenticated()) {
-    return next();
+    return res.redirect("/admin/dashboard");
   }
-  res.redirect("/admin/login");
+  return next();
 };
+module.exports.checkAdminLogin = (req, res, next) => {
+  if (req.isAuthenticated()) {
+    if (req.user.isAdmin) {
+      return next();
+    } else {
+      return res.status(403).json({ message: "Unauthorized" });
+    }
+  } else {
+    return res.redirect("/admin/login");
+  }
+};
+

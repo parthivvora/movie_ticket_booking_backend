@@ -34,7 +34,11 @@ const {
 const { adminAuth } = require("../middleware/adminAuth");
 const blogImageUpload = require("../middleware/blogImageUpload");
 const upload = require("../middleware/movieImagesUpload");
-const { isAuthenticated } = require("../middleware/check");
+const {
+  checkAdminLogin,
+  checkAdminLogincheckAdmin,
+  checkAdmin,
+} = require("../middleware/check");
 const {
   addTheater,
   getAllTheaters,
@@ -85,7 +89,7 @@ router.use(passport.initialize());
 router.use(passport.session());
 
 // Admin
-router.get("/login", getAdminLogin);
+router.get("/login", checkAdmin, getAdminLogin);
 router.post(
   "/login",
   passport.authenticate("local", {
@@ -95,35 +99,37 @@ router.post(
   })
 );
 router.get("/logout", (req, res) => {
-  res.clearCookie("admin");
-  return res.render("login");
+  req.logout((err) => {
+    res.json(err);
+  });
+  res.redirect("/admin/login");
 });
 
 // Get all users list
-router.get("/user-list", isAuthenticated, getUserLists);
+router.get("/user-list", checkAdminLogin, getUserLists);
 
 // Dashboard
-router.get("/dashboard", isAuthenticated, getDashboard);
+router.get("/dashboard", checkAdminLogin, getDashboard);
 
 // Get all contact information
-router.get("/contact-list", isAuthenticated, getContactInformation);
+router.get("/contact-list", checkAdminLogin, getContactInformation);
 
 // Get all subscribes information
-router.get("/subscribe-list", isAuthenticated, getSubscribeDetails);
+router.get("/subscribe-list", checkAdminLogin, getSubscribeDetails);
 
 // Blog
 router.post(
   "/add-blog",
-  isAuthenticated,
+  checkAdminLogin,
   blogImageUpload.single("blogImage"),
   addBlog
 );
-router.get("/add-blog", isAuthenticated, addBlogPageRender);
-router.get("/get-blog", isAuthenticated, getAllBlogs);
-router.delete("/delete-blog/:blogId", isAuthenticated, deleteBlogById);
+router.get("/add-blog", checkAdminLogin, addBlogPageRender);
+router.get("/get-blog", checkAdminLogin, getAllBlogs);
+router.delete("/delete-blog/:blogId", checkAdminLogin, deleteBlogById);
 router.put(
   "/update-blog/:blogId",
-  isAuthenticated,
+  checkAdminLogin,
   blogImageUpload.single("blogImage"),
   updateBlogById
 );
@@ -132,39 +138,39 @@ router.put(
 router.get("/add-movie", addMoviePageRender);
 router.post(
   "/add-movie",
-  isAuthenticated,
+  checkAdminLogin,
   upload.fields([
     { name: "movieBanner", maxCount: 1 },
     { name: "movieThumbImg", maxCount: 1 },
   ]),
   addMovie
 );
-router.get("/get-movie", isAuthenticated, getAllMovies);
+router.get("/get-movie", checkAdminLogin, getAllMovies);
 
 // Add Language
-router.get("/add-language", isAuthenticated, addLanguagePageRender);
-router.post("/add-language", isAuthenticated, addLanguage);
-router.get("/get-language", isAuthenticated, getAllLanguage);
+router.get("/add-language", checkAdminLogin, addLanguagePageRender);
+router.post("/add-language", checkAdminLogin, addLanguage);
+router.get("/get-language", checkAdminLogin, getAllLanguage);
 
 // Add Movie Type
-router.get("/add-movieType", isAuthenticated, addMovieTypePageRender);
-router.post("/add-movieType", isAuthenticated, addMovieType);
-router.get("/get-movieType", isAuthenticated, getAllMovieType);
+router.get("/add-movieType", checkAdminLogin, addMovieTypePageRender);
+router.post("/add-movieType", checkAdminLogin, addMovieType);
+router.get("/get-movieType", checkAdminLogin, getAllMovieType);
 
 // Add Theater
-router.get("/add-theater", isAuthenticated, addTheaterPageRender);
-router.post("/add-theater", isAuthenticated, addTheater);
-router.get("/get-theater", isAuthenticated, getAllTheaters);
+router.get("/add-theater", checkAdminLogin, addTheaterPageRender);
+router.post("/add-theater", checkAdminLogin, addTheater);
+router.get("/get-theater", checkAdminLogin, getAllTheaters);
 
 // Add Movie Show Type
-router.get("/add-movieShowType", isAuthenticated, addMovieShowTypePageRender);
-router.post("/add-movieShowType", isAuthenticated, addMovieShowType);
-router.get("/get-movieShowType", isAuthenticated, getAllMovieShowType);
+router.get("/add-movieShowType", checkAdminLogin, addMovieShowTypePageRender);
+router.post("/add-movieShowType", checkAdminLogin, addMovieShowType);
+router.get("/get-movieShowType", checkAdminLogin, getAllMovieShowType);
 
 // Add Screen
-router.get("/add-screen", isAuthenticated, addScreenPageRender);
-router.post("/add-screen", isAuthenticated, addScreen);
-router.get("/get-screen", isAuthenticated, getAllScreens);
+router.get("/add-screen", checkAdminLogin, addScreenPageRender);
+router.post("/add-screen", checkAdminLogin, addScreen);
+router.get("/get-screen", checkAdminLogin, getAllScreens);
 
 // Add Show Time of Movie
 router.post("/add-showTime", addShowTimes);
@@ -173,12 +179,12 @@ router.get("/get-showTime", getAllShowTime);
 // Actor
 router.post(
   "/add-actor",
-  isAuthenticated,
+  checkAdminLogin,
   actorImageUpload.single("actorImage"),
   addActor
 );
-router.get("/add-actor", isAuthenticated, addActorPageRender);
-router.get("/get-actor", isAuthenticated, getActor);
+router.get("/add-actor", checkAdminLogin, addActorPageRender);
+router.get("/get-actor", checkAdminLogin, getActor);
 
 // Crew
 router.post("/add-crew", crewImageUpload.single("crewImage"), addCrew);

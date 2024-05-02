@@ -8,17 +8,6 @@ exports.addMovieValidation = joi.object({
   duration: joi.string().required(),
   movieShowType: joi.array().required(),
   description: joi.string().required(),
-  cast: joi.array().items(
-    joi.object({
-      castName: joi.string().required(),
-      castImage: joi.string().required(),
-    })
-  ),
-  crew: joi.array().items(
-    joi.object({
-      crewName: joi.string().required(),
-      crewImage: joi.string().required(),
-      crewRole: joi.string().required(),
-    })
-  ),
+  castId: joi.array().required(),
+  crewId: joi.array().required(),
 });

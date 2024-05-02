@@ -19,6 +19,7 @@ const {
 const {
   addMovie,
   addMoviePageRender,
+  getAllMovies,
 } = require("../controllers/movie.controller");
 const {
   addLanguage,
@@ -60,7 +61,11 @@ const {
   addActorPageRender,
 } = require("../controllers/actor.controller");
 const crewImageUpload = require("../middleware/crewImageUpload");
-const { addCrew, addCrewPageRender, getCrew } = require("../controllers/crew.controller");
+const {
+  addCrew,
+  addCrewPageRender,
+  getCrew,
+} = require("../controllers/crew.controller");
 require("../middleware/localStrategy");
 const router = express();
 
@@ -127,12 +132,14 @@ router.put(
 router.get("/add-movie", addMoviePageRender);
 router.post(
   "/add-movie",
+  isAuthenticated,
   upload.fields([
     { name: "movieBanner", maxCount: 1 },
     { name: "movieThumbImg", maxCount: 1 },
   ]),
   addMovie
 );
+router.get("/get-movie", isAuthenticated, getAllMovies);
 
 // Add Language
 router.get("/add-language", isAuthenticated, addLanguagePageRender);

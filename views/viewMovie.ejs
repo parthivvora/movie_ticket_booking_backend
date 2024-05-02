@@ -1,0 +1,124 @@
+<%- include('header') %>
+
+<section class="content">
+  <div class="block-header">
+    <div class="row">
+      <div class="col-lg-7 col-md-5 col-sm-12">
+        <h2>
+          Theaters
+          <small class="text-muted">Welcome to Boleto</small>
+        </h2>
+      </div>
+      <div class="col-lg-5 col-md-7 col-sm-12">
+        <ul class="breadcrumb float-md-right">
+          <li class="breadcrumb-item">
+            <a href="/admin/dashboard"><i class="zmdi zmdi-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active">Theater</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row clearfix">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="header">
+            <h2><strong>List</strong></h2>
+          </div>
+          <div class="body">
+            <div class="table-responsive">
+              <table
+                class="table table-bordered table-striped table-hover js-basic-example dataTable"
+              >
+                <thead>
+                  <tr>
+                    <th>Movie Id</th>
+                    <th>Movie Name</th>
+                    <th>Description</th>
+                    <th>Release Date</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% movieData.forEach(movie => { %>
+                  <tr>
+                    <td><%= movie._id %></td>
+                    <td><%= movie.movieName %></td>
+                    <td><%= movie.description.slice(0,30)+" ..." %></td>
+                    <td>
+                      <% const dateOptions = { day: '2-digit', month: '2-digit',
+                      year: 'numeric' }; %> <%= new
+                      Date(movie.releaseDate).toLocaleDateString('en-IN',
+                      dateOptions) %>
+                    </td>
+                    <td>
+                      <i
+                        class="fa-regular fa-eye"
+                        style="
+                          font-size: 24px;
+                          display: flex;
+                          align-items: center;
+                          justify-content: center;
+                          cursor: pointer;
+                        "
+                        data-bs-toggle="modal"
+                        data-bs-target="#viewMovieInfoModal"
+                      ></i>
+                    </td>
+                  </tr>
+                  <% }) %>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="viewMovieInfoModal"
+  data-bs-backdrop="static"
+  data-bs-keyboard="false"
+  tabindex="-1"
+  aria-labelledby="viewMovieInfoModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="viewMovieInfoModalLabel">Movie Information</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <div
+          class="alert alert-danger"
+          role="alert"
+          id="errorMessage"
+          style="display: none"
+        ></div>
+        <div class="mb-3">
+          <label for="movieName" class="form-label m-0">Movie Name</label>
+          <h4 style="line-height: normal;margin: 0px;">movieName</h4>
+        </div>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+        <button onclick="updateBlog()" type="submit" class="btn btn-primary">
+          Update
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%- include('footer') %>

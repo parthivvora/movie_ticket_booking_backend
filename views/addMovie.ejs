@@ -1,0 +1,232 @@
+<%- include('header') %>
+
+<section class="content blog-page">
+  <div class="block-header">
+    <div class="row">
+      <div class="col-lg-7 col-md-5 col-sm-12">
+        <h2>
+          New Movie
+          <small>Welcome to Boleto</small>
+        </h2>
+      </div>
+      <div class="col-lg-5 col-md-7 col-sm-12">
+        <ul class="breadcrumb float-md-right">
+          <li class="breadcrumb-item">
+            <a href="/admin/dashboard"><i class="zmdi zmdi-home"></i> Home</a>
+          </li>
+          <li class="breadcrumb-item active">Movie</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12">
+        <div class="card">
+          <div class="body">
+            <% if (messages.success) { %>
+            <div class="alert alert-success" role="alert">
+              <%= messages.success %>
+            </div>
+            <% } %> <% if (messages.error) { %>
+            <div class="alert alert-danger" role="alert">
+              <%= messages.error %>
+            </div>
+            <% } %>
+            <form
+              action="/admin/add-movie"
+              id="frmFileUpload"
+              class="m-b-20 m-t-20 row add-movie-form"
+              method="post"
+              enctype="multipart/form-data"
+            >
+              <div class="col-sm-6">
+                <label for="movieName" class="form-label">Movie Name</label>
+                <input
+                  type="text"
+                  class="form-control"
+                  id="movieName"
+                  placeholder="Enter movie name"
+                  style="height: 45px !important"
+                  name="movieName"
+                />
+              </div>
+              <div class="col-sm-6">
+                <label for="languageTypes" class="form-label"
+                  >Language Type</label
+                >
+                <select
+                  class="form-select"
+                  multiple
+                  aria-label="Default select example"
+                  style="left: 0px !important"
+                  name="languageTypes"
+                >
+                  <% languageData.forEach(language => { %>
+                  <option
+                    value="<%= language._id %>"
+                    style="text-transform: capitalize"
+                  >
+                    <%= language.languageName %>
+                  </option>
+                  <% }) %>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label for="movieType" class="form-label mt-3"
+                  >Movie Type</label
+                >
+                <select
+                  class="form-select"
+                  multiple
+                  aria-label="Default select example"
+                  style="left: 0px !important"
+                  name="movieType"
+                >
+                  <% movieTypeData.forEach(movieType => { %>
+                  <option
+                    value="<%= movieType._id %>"
+                    style="text-transform: capitalize"
+                  >
+                    <%= movieType.movieTypeName %>
+                  </option>
+                  <% }) %>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label for="releaseDate" class="form-label mt-3"
+                  >Movie Release Date</label
+                >
+                <input
+                  type="date"
+                  class="form-control"
+                  id="releaseDate"
+                  placeholder="Enter movie release date"
+                  style="height: 45px !important"
+                  name="releaseDate"
+                />
+              </div>
+              <div class="col-sm-6">
+                <label for="duration" class="form-label mt-3"
+                  >Duration Time</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="duration"
+                  placeholder="Enter movie duration time"
+                  style="height: 45px !important"
+                  name="duration"
+                />
+              </div>
+              <div class="col-sm-6">
+                <label for="movieShowType" class="form-label mt-3"
+                  >Movie Show Type</label
+                >
+                <select
+                  class="form-select"
+                  multiple
+                  aria-label="Default select example"
+                  style="left: 0px !important"
+                  name="movieShowType"
+                >
+                  <% movieShowTypeData.forEach(movieShowType => { %>
+                  <option
+                    value="<%= movieShowType._id %>"
+                    style="text-transform: capitalize"
+                  >
+                    <%= movieShowType.movieShowTypeName %>
+                  </option>
+                  <% }) %>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label for="description" class="form-label mt-3"
+                  >Movie Description</label
+                >
+                <input
+                  type="text"
+                  class="form-control"
+                  id="description"
+                  placeholder="Enter movie description"
+                  style="height: 45px !important"
+                  name="description"
+                />
+              </div>
+              <div class="col-sm-6">
+                <label for="castId" class="form-label mt-3">Movie Cast</label>
+                <select
+                  class="form-select"
+                  multiple
+                  aria-label="Default select example"
+                  style="left: 0px !important"
+                  name="castId"
+                >
+                  <% actorData.forEach(actor => { %>
+                  <option
+                    value="<%= actor._id %>"
+                    style="text-transform: capitalize"
+                  >
+                    <%= actor.actorName %>
+                  </option>
+                  <% }) %>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label for="crewId" class="form-label mt-3">Movie Crew</label>
+                <select
+                  class="form-select"
+                  multiple
+                  aria-label="Default select example"
+                  style="left: 0px !important"
+                  name="crewId"
+                >
+                  <% crewData.forEach(crew => { %>
+                  <option
+                    value="<%= crew._id %>"
+                    style="text-transform: capitalize"
+                  >
+                    <%= crew.crewName %>
+                  </option>
+                  <% }) %>
+                </select>
+              </div>
+              <div class="col-sm-6">
+                <label for="movieThumbImg" class="form-label mt-3"
+                  >Movie Thumbnail Image</label
+                >
+                <input
+                  class="form-control"
+                  type="file"
+                  id="formFile"
+                  name="movieThumbImg"
+                />
+              </div>
+              <div class="col-sm-6">
+                <label for="movieBanner" class="form-label mt-3"
+                  >Movie Banner Image</label
+                >
+                <input
+                  class="form-control"
+                  type="file"
+                  id="formFile"
+                  name="movieBanner"
+                />
+              </div>
+              <div class="col-sm-12">
+                <button
+                  type="submit"
+                  class="btn btn-primary btn-round waves-effect m-t-20"
+                >
+                  Post
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<%- include('footer') %>

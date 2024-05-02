@@ -43,7 +43,13 @@
                   <tr>
                     <td><%= actor._id %></td>
                     <td><%= actor.actorName %></td>
-                    <td><img src="<%= actor.actorImage %>" alt="actor-img" class="w-25 h-25"></td>
+                    <td>
+                      <img
+                        src="<%= actor.actorImage %>"
+                        alt="actor-img"
+                        style="width: 100px; height: 100px; object-fit: cover"
+                      />
+                    </td>
                   </tr>
                   <% }) %>
                 </tbody>

@@ -14,9 +14,6 @@ const movieInfoSchema = new mongoose.Schema(
     movieBanner: {
       type: String,
     },
-    movieImages: {
-      type: [String],
-    },
     movieType: {
       type: [mongoose.Schema.Types.ObjectId],
     },
@@ -32,29 +29,12 @@ const movieInfoSchema = new mongoose.Schema(
     description: {
       type: String,
     },
-    cast: [
-      {
-        castName: {
-          type: String,
-        },
-        castImage: {
-          type: String,
-        },
-      },
-    ],
-    crew: [
-      {
-        crewName: {
-          type: String,
-        },
-        crewImage: {
-          type: String,
-        },
-        crewRole: {
-          type: String,
-        },
-      },
-    ],
+    castId: {
+      type: [String],
+    },
+    crewId: {
+      type: [String],
+    },
     isDeleted: {
       type: Boolean,
       default: false,

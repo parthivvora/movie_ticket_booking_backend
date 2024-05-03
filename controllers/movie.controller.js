@@ -103,7 +103,69 @@ exports.addMoviePageRender = async (req, res) => {
 // Get all movie data by Admin
 exports.getAllMovies = async (req, res) => {
   try {
-    const movieData = await movieModel.find().select("-__v");
+    const movieData = await movieModel.aggregate([
+      {
+        $lookup: {
+          from: "languages",
+          localField: "languageTypes",
+          foreignField: "_id",
+          as: "languageData",
+        },
+      },
+      {
+        $lookup: {
+          from: "movietypes",
+          localField: "movieType",
+          foreignField: "_id",
+          as: "movieTypeData",
+        },
+      },
+      {
+        $lookup: {
+          from: "movieshowtypes",
+          localField: "movieShowType",
+          foreignField: "_id",
+          as: "movieShowTypeData",
+        },
+      },
+      {
+        $lookup: {
+          from: "actors",
+          localField: "castId",
+          foreignField: "_id",
+          as: "castData",
+        },
+      },
+      {
+        $lookup: {
+          from: "crews",
+          localField: "crewId",
+          foreignField: "_id",
+          as: "crewData",
+        },
+      },
+      {
+        $project: {
+          __v: 0,
+          createdAt: 0,
+          updatedAt: 0,
+          languageTypes: 0,
+          movieType: 0,
+          movieShowType: 0,
+          castId: 0,
+          crewId: 0,
+          "languageData.__v": 0,
+          "movieTypeData.__v": 0,
+          "movieShowTypeData.__v": 0,
+          "castData.createdAt": 0,
+          "castData.updatedAt": 0,
+          "castData.__v": 0,
+          "crewData.createdAt": 0,
+          "crewData.updatedAt": 0,
+          "crewData.__v": 0,
+        },
+      },
+    ]);
     if (movieData.length > 0) {
       Object.keys(movieData).forEach((key) => {
         movieData[key][
@@ -115,9 +177,13 @@ exports.getAllMovies = async (req, res) => {
       });
       const currentPage = apiRoutes.ALL_MOVIE;
       return res.render("viewMovie", { movieData, currentPage });
+      // return res.status(responseStatusCode.INTERNAL_SERVER).json({
+      //   status: responseStatusText.ERROR,
+      //   movieData,
+      // });
     }
   } catch (error) {
-    console.log("🚀 ~ exports.getAllMovies= ~ error:", error)
+    console.log("🚀 ~ exports.getAllMovies= ~ error:", error);
     return res.status(responseStatusCode.INTERNAL_SERVER).json({
       status: responseStatusText.ERROR,
       message: error.message,

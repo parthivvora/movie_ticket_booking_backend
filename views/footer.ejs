@@ -91,9 +91,41 @@
         }
       });
   }
-  
+
   function closeDeleteBlogMsg() {
     document.getElementById("toast-body").innerHTML = "";
     document.getElementById("liveToast").style.opacity = 0;
+  }
+
+  function showSingleMovie(movie) {
+    console.log("🚀 ~ showSingleMovie ~ movie:", JSON.parse(movie));
+    const movieData = JSON.parse(movie);
+
+    const languageData = movieData.languageData
+      .map((language) => language.languageName)
+      .join(", ");
+    const movieType = movieData.movieTypeData
+      .map((movieType) => movieType.movieTypeName)
+      .join(", ");
+    const movieShowType = movieData.movieShowTypeData
+      .map((movieShowType) => movieShowType.movieShowTypeName)
+      .join(", ");
+    const castData = movieData.castData
+      .map((cast) => cast.actorName)
+      .join(", ");
+    const crewData = movieData.crewData.map((crew) => crew.crewName).join(", ");
+
+    document.getElementById("movieName").innerHTML = movieData.movieName;
+    document.getElementById("languageTypes").innerHTML = languageData;
+    document.getElementById("movieType").innerHTML = movieType;
+    document.getElementById("releaseDate").innerHTML = movieData.releaseDate;
+    document.getElementById("duration").innerHTML = movieData.duration;
+    document.getElementById("movieShowType").innerHTML = movieShowType;
+    document.getElementById("description").innerHTML =
+      movieData.description?.slice(0, 18) + "...";
+    document.getElementById("cast").innerHTML = castData;
+    document.getElementById("crew").innerHTML = crewData;
+    document.getElementById("movieThumbImg").src = movieData.movieThumbImg;
+    document.getElementById("movieBanner").src = movieData.movieBanner;
   }
 </script>

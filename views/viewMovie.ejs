@@ -64,6 +64,7 @@
                         "
                         data-bs-toggle="modal"
                         data-bs-target="#viewMovieInfoModal"
+                        onclick="showSingleMovie('<%= JSON.stringify(movie) %>')"
                       ></i>
                     </td>
                   </tr>
@@ -91,7 +92,9 @@
   <div class="modal-dialog modal-dialog-centered">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="viewMovieInfoModalLabel">Movie Information</h5>
+        <h5 class="modal-title" id="viewMovieInfoModalLabel">
+          Movie Information
+        </h5>
         <button
           type="button"
           class="btn-close"
@@ -99,17 +102,92 @@
           aria-label="Close"
         ></button>
       </div>
-      <div class="modal-body">
+      <div class="modal-body" style="word-wrap: break-word;">
         <div
           class="alert alert-danger"
           role="alert"
           id="errorMessage"
           style="display: none"
         ></div>
-        <div class="mb-3">
-          <label for="movieName" class="form-label m-0">Movie Name</label>
-          <h4 style="line-height: normal;margin: 0px;">movieName</h4>
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="movieName" class="form-label m-0"
+                >Movie Name :
+              </label>
+              <h6 style="line-height: normal; margin: 0px" id="movieName"></h6>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="languageTypes" class="form-label m-0">Language : </label>
+              <h6 style="line-height: normal; margin: 0px" id="languageTypes"></h6>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="movieType" class="form-label m-0"
+                >Movie Type :
+              </label>
+              <h6 style="line-height: normal; margin: 0px" id="movieType"></h6>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="releaseDate" class="form-label m-0"
+                >Release Date :
+              </label>
+              <h6 style="line-height: normal; margin: 0px" id="releaseDate"></h6>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="duration" class="form-label m-0">Duration : </label>
+              <h6 style="line-height: normal; margin: 0px" id="duration"></h6>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="movieShowType" class="form-label m-0">Show Type : </label>
+              <h6 style="line-height: normal; margin: 0px" id="movieShowType"></h6>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="description" class="form-label m-0"
+                >Description :
+              </label>
+              <h6 style="line-height: normal; margin: 0px" id="description"></h6>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="cast" class="form-label m-0">Cast : </label>
+              <h6 style="line-height: normal; margin: 0px" id="cast"></h6>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="crew" class="form-label m-0">Crew : </label>
+              <h6 style="line-height: normal; margin: 0px" id="crew"></h6>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="movieThumbImg" class="form-label m-0"
+                >Thumbnail Image :
+              </label>
+              <img id="movieThumbImg" style="object-fit: cover; width: 200px; height: 100px;"></img>
+            </div>
+          </div>
+          <div class="col-sm-6">
+            <div class="mb-3">
+              <label for="movieBanner" class="form-label m-0">Banner Image : </label>
+              <img id="movieBanner"></img>
+            </div>
+          </div>
         </div>
+
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
           Close
         </button>

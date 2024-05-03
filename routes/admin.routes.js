@@ -145,7 +145,7 @@ router.post(
   ]),
   addMovie
 );
-router.get("/get-movie", checkAdminLogin, getAllMovies);
+router.get("/get-movie", getAllMovies);
 
 // Add Language
 router.get("/add-language", checkAdminLogin, addLanguagePageRender);

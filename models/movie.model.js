@@ -30,10 +30,10 @@ const movieInfoSchema = new mongoose.Schema(
       type: String,
     },
     castId: {
-      type: [String],
+      type: [mongoose.Schema.Types.ObjectId],
     },
     crewId: {
-      type: [String],
+      type: [mongoose.Schema.Types.ObjectId],
     },
     isDeleted: {
       type: Boolean,

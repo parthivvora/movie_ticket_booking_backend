@@ -11,3 +11,8 @@ exports.addMovieValidation = joi.object({
   castId: joi.array().required(),
   crewId: joi.array().required(),
 });
+
+exports.addMovieRatingValidation = joi.object({
+  movieId: joi.string().required(),
+  review: joi.string().required(),
+});

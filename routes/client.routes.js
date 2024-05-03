@@ -4,6 +4,7 @@ const { addContactInformation } = require("../controllers/contact.controller");
 const { addSubscribeDetails } = require("../controllers/subscribe.controller");
 const { userAuth } = require("../middleware/userAuth");
 const { getAllBlogsByUser, getSingleBlogByUser } = require("../controllers/blog.controller");
+const { addMovieRating } = require("../controllers/movieRating.controller");
 const router = express();
 
 // User
@@ -19,6 +20,9 @@ router.post("/add-subscribe", userAuth, addSubscribeDetails);
 // Blog
 router.get("/get-blog-user", getAllBlogsByUser);
 router.get("/get-blog/:blogId", getSingleBlogByUser);
+
+// Movie Rating
+router.post("/add-rating", userAuth, addMovieRating);
 
 module.exports = router;
 

@@ -22,7 +22,7 @@ router.get("/get-blog-user", getAllBlogsByUser);
 router.get("/get-blog/:blogId", getSingleBlogByUser);
 
 // Movie Rating
-router.post("/add-rating", userAuth, addMovieRating);
+router.post("/add-movieRating", userAuth, addMovieRating);
 
 module.exports = router;
 

@@ -70,6 +70,9 @@ const {
   addCrewPageRender,
   getCrew,
 } = require("../controllers/crew.controller");
+const {
+  viewMovieRatingByAdmin,
+} = require("../controllers/movieRating.controller");
 require("../middleware/localStrategy");
 const router = express();
 
@@ -145,7 +148,10 @@ router.post(
   ]),
   addMovie
 );
-router.get("/get-movie", getAllMovies);
+router.get("/get-movie", checkAdminLogin, getAllMovies);
+
+// Movie Rating
+router.get("/get-movieRating", viewMovieRatingByAdmin);
 
 // Add Language
 router.get("/add-language", checkAdminLogin, addLanguagePageRender);
